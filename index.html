@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download TikTok, Instagram, X, Facebook videos without watermark - fast & free">
+    <title>SSSAll.io • Download Any Video Fast</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            transition: background-color 0.4s, color 0.4s;
+        }
+        .logo-font { font-family: 'Space Grotesk', sans-serif; }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a0033 100%);
+        }
+        .light .hero-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        .dark .navbar {
+            background: rgba(15, 15, 15, 0.95);
+        }
+        
+        .gradient-btn {
+            background: linear-gradient(to right, #3b82f6, #a855f7);
+        }
+        
+        .dog-logo {
+            transition: transform 0.4s ease;
+        }
+        .dog-logo:hover {
+            transform: scale(1.12) rotate(8deg);
+        }
+        
+        .result-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white light:bg-slate-50 light:text-zinc-950">
+
+    <!-- NAVBAR -->
+    <nav class="navbar border-b border-white/10 dark:border-white/10 light:border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg dog-logo overflow-hidden">
+                    🐶
+                </div>
+                <span class="text-3xl font-bold tracking-tighter logo-font text-inherit">SSSAll.io</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-inherit">
+                <a href="#how" class="hover:text-blue-400 transition">How it works</a>
+                <a href="#platforms" class="hover:text-blue-400 transition">Platforms</a>
+                <a href="#features" class="hover:text-blue-400 transition">Features</a>
+                <a href="#app" class="hover:text-blue-400 transition">Get App</a>
+                <a href="#blog" class="hover:text-blue-400 transition">Blog</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-white/20 dark:hover:bg-zinc-800 light:hover:bg-slate-100">
+                    <i id="theme-icon" class="fa-solid fa-moon text-xl"></i>
+                </button>
+                <button onclick="document.getElementById('url-input').focus()" 
+                        class="gradient-btn text-white px-6 py-3 rounded-3xl font-semibold flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-arrow-rotate-right"></i> Try Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 px-6 py-2 rounded-3xl text-sm mb-8">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-400"></span>
+                </span>
+                LIVE • TikTok • Instagram • X • Facebook + 20 more
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6 text-inherit">
+                Download any video.<br>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500">No watermark. Real fast.</span>
+            </h1>
+            
+            <p class="text-xl text-zinc-300 dark:text-zinc-300 light:text-slate-600 max-w-2xl mx-auto mb-10">
+                Paste link → Get HD video instantly. Now with cute dog mascot in light mode 🐶
+            </p>
+            
+            <form id="download-form" class="max-w-2xl mx-auto flex flex-col md:flex-row gap-3 bg-zinc-900/80 dark:bg-zinc-900/80 light:bg-white border border-white/10 light:border-slate-300 rounded-3xl p-2">
+                <div class="flex-1 flex items-center px-6 py-4">
+                    <i class="fa-solid fa-link text-blue-400 mr-4 text-2xl"></i>
+                    <input id="url-input" type="text" 
+                           class="flex-1 bg-transparent outline-none text-lg placeholder-zinc-400 dark:placeholder-zinc-400 light:placeholder-slate-400 text-inherit"
+                           placeholder="Paste TikTok / Instagram / X / Facebook link...">
+                </div>
+                <button type="submit" class="gradient-btn px-10 py-4 rounded-3xl font-semibold text-lg flex items-center gap-3 text-white hover:scale-105 transition">
+                    <i class="fa-solid fa-download"></i> DOWNLOAD
+                </button>
+            </form>
+            
+            <div class="flex justify-center gap-8 mt-12 text-3xl">
+                <i class="fa-brands fa-tiktok"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <span class="text-emerald-400 text-sm self-center font-medium">+15 more</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- RESULTS SECTION -->
+    <div id="results-section" class="max-w-5xl mx-auto px-6 py-12 hidden">
+        <div class="bg-zinc-900 dark:bg-zinc-900 light:bg-white rounded-3xl p-8 border border-white/10 light:border-slate-200">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-4">
+                    <div id="result-platform-icon" class="text-5xl"></div>
+                    <div>
+                        <p id="result-platform-name" class="font-semibold text-2xl text-inherit"></p>
+                        <p id="result-video-title" class="text-zinc-400 dark:text-zinc-400 light:text-slate-600 text-sm">Fetching title...</p>
+                    </div>
+                </div>
+                <button onclick="hideResults()" class="text-zinc-400 dark:text-zinc-400 light:text-slate-600 hover:text-inherit">✕ Clear</button>
+            </div>
+            
+            <div id="processing-state" class="hidden text-center py-12">
+                <div class="w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <p class="text-xl text-inherit">Processing your video...</p>
+                <p class="text-sm text-zinc-400 dark:text-zinc-400 light:text-slate-600">Connecting to backend • 2-4 seconds</p>
+            </div>
+            
+            <div id="success-state" class="hidden">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-black rounded-3xl aspect-video relative overflow-hidden">
+                        <img id="preview-image" src="https://picsum.photos/id/1015/800/450" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-center justify-center">
+                            <i class="fa-solid fa-play-circle text-7xl text-white/80"></i>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-emerald-500 text-black text-xs px-4 py-1 rounded-2xl font-medium flex items-center">
+                            <i class="fa-solid fa-circle-check mr-2"></i> WATERMARK REMOVED
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div onclick="triggerRealDownload()" class="result-card cursor-pointer bg-zinc-800 dark:bg-zinc-800 light:bg-slate-100 hover:bg-zinc-700 p-6 rounded-3xl flex justify-between items-center group">
+                            <div class="flex items-center gap-4">
+                                <i class="fa-solid fa-video text-cyan-400 text-3xl"></i>
+                                <div>
+                                    <p class="font-semibold text-inherit">HD Video (MP4) • 1080p</p>
+                                    <p class="text-xs text-emerald-400">No watermark • Direct download</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-download text-2xl group-active:rotate-12 transition"></i>
+                        </div>
+                        
+                        <div onclick="triggerRealDownload()" class="result-card cursor-pointer bg-zinc-800 dark:bg-zinc-800 light:bg-slate-100 hover:bg-zinc-700 p-6 rounded-3xl flex justify-between items-center group">
+                            <div class="flex items-center gap-4">
+                                <i class="fa-solid fa-music text-purple-400 text-3xl"></i>
+                                <div>
+                                    <p class="font-semibold text-inherit">Audio Only (MP3)</p>
+                                    <p class="text-xs text-emerald-400">Original sound</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-download text-2xl group-active:rotate-12 transition"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GET APP SECTION -->
+    <section id="app" class="py-20 bg-black dark:bg-black light:bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-4 text-inherit">Get the SSSAll Mobile App</h2>
+            <p class="max-w-md mx-auto text-zinc-400 dark:text-zinc-400 light:text-slate-600 mb-12">Faster downloads, offline mode, batch processing and notifications.</p>
+            
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                <div class="flex gap-6">
+                    <img src="https://picsum.photos/id/870/280/580" class="rounded-3xl shadow-2xl border border-white/10" alt="iOS">
+                    <img src="https://picsum.photos/id/1015/280/580" class="rounded-3xl shadow-2xl border border-white/10" alt="Android">
+                </div>
+                <div class="space-y-6">
+                    <button class="bg-black light:bg-white light:text-black border border-white/20 light:border-slate-300 px-8 py-5 rounded-3xl flex items-center gap-4 w-full md:w-auto hover:scale-105 transition">
+                        <i class="fa-brands fa-apple text-5xl"></i>
+                        <div>
+                            <div class="text-xs opacity-70">Download on the</div>
+                            <div class="font-semibold text-lg">App Store</div>
+                        </div>
+                    </button>
+                    <button class="bg-black light:bg-white light:text-black border border-white/20 light:border-slate-300 px-8 py-5 rounded-3xl flex items-center gap-4 w-full md:w-auto hover:scale-105 transition">
+                        <i class="fa-brands fa-google-play text-5xl"></i>
+                        <div>
+                            <div class="text-xs opacity-70">GET IT ON</div>
+                            <div class="font-semibold text-lg">Google Play</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section id="blog" class="py-20 bg-zinc-900 dark:bg-zinc-900 light:bg-slate-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-inherit">Featured Articles</h2>
+                <p class="text-zinc-400 dark:text-zinc-400 light:text-slate-600 mt-3">Latest tips, guides & updates</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group bg-zinc-800 dark:bg-zinc-800 light:bg-white rounded-3xl overflow-hidden hover:-translate-y-2 transition-all">
+                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://picsum.photos/id/201/600/400')"></div>
+                    <div class="p-8">
+                        <div class="text-xs text-blue-400 mb-3">TIKTOK • MARCH 30, 2026</div>
+                        <h3 class="font-semibold text-2xl leading-tight text-inherit mb-4 group-hover:text-blue-400 transition">How to Download TikTok Videos Without Watermark in 2026</h3>
+                        <p class="text-zinc-400 dark:text-zinc-400 light:text-slate-600 line-clamp-3">Even after the latest app updates, SSSAll.io delivers clean HD videos with original audio in seconds.</p>
+                        <div class="mt-8 text-xs flex justify-between">
+                            <span class="text-inherit">6 min read</span>
+                            <span class="text-blue-400 group-hover:underline">Read full →</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group bg-zinc-800 dark:bg-zinc-800 light:bg-white rounded-3xl overflow-hidden hover:-translate-y-2 transition-all">
+                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://picsum.photos/id/301/600/400')"></div>
+                    <div class="p-8">
+                        <div class="text-xs text-blue-400 mb-3">INSTAGRAM • MARCH 27, 2026</div>
+                        <h3 class="font-semibold text-2xl leading-tight text-inherit mb-4 group-hover:text-blue-400 transition">Instagram Reels Downloader – Best Quality & Speed</h3>
+                        <p class="text-zinc-400 dark:text-zinc-400 light:text-slate-600 line-clamp-3">Get full 1080p Reels with sound. Tested against 12 tools — SSSAll.io wins.</p>
+                        <div class="mt-8 text-xs flex justify-between">
+                            <span class="text-inherit">5 min read</span>
+                            <span class="text-blue-400 group-hover:underline">Read full →</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group bg-zinc-800 dark:bg-zinc-800 light:bg-white rounded-3xl overflow-hidden hover:-translate-y-2 transition-all">
+                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://picsum.photos/id/401/600/400')"></div>
+                    <div class="p-8">
+                        <div class="text-xs text-blue-400 mb-3">BEHIND THE SCENES • MARCH 25, 2026</div>
+                        <h3 class="font-semibold text-2xl leading-tight text-inherit mb-4 group-hover:text-blue-400 transition">Why Our Cute Dog Mascot Makes Downloading Fun</h3>
+                        <p class="text-zinc-400 dark:text-zinc-400 light:text-slate-600 line-clamp-3">The story behind the dog logo and how small design touches improve user experience.</p>
+                        <div class="mt-8 text-xs flex justify-between">
+                            <span class="text-inherit">4 min read</span>
+                            <span class="text-blue-400 group-hover:underline">Read full →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            const icon = document.getElementById('theme-icon');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        }
+
+        function detectPlatform(url) {
+            const lower = url.toLowerCase();
+            if (lower.includes('tiktok')) return {name: 'TikTok', icon: 'fa-brands fa-tiktok', color: 'text-cyan-400', preview: 'https://picsum.photos/id/1015/800/450'};
+            if (lower.includes('instagram')) return {name: 'Instagram', icon: 'fa-brands fa-instagram', color: 'text-pink-400', preview: 'https://picsum.photos/id/201/800/450'};
+            if (lower.includes('x.com') || lower.includes('twitter')) return {name: 'X / Twitter', icon: 'fa-brands fa-x-twitter', color: 'text-white', preview: 'https://picsum.photos/id/301/800/450'};
+            if (lower.includes('facebook')) return {name: 'Facebook', icon: 'fa-brands fa-facebook', color: 'text-blue-400', preview: 'https://picsum.photos/id/401/800/450'};
+            return {name: 'Video', icon: 'fa-solid fa-video', color: 'text-emerald-400', preview: 'https://picsum.photos/id/1015/800/450'};
+        }
+
+        function showResults(platform) {
+            const section = document.getElementById('results-section');
+            section.classList.remove('hidden');
+            section.scrollIntoView({ behavior: 'smooth' });
+            
+            document.getElementById('processing-state').classList.remove('hidden');
+            document.getElementById('success-state').classList.add('hidden');
+            
+            document.getElementById('result-platform-icon').innerHTML = `<i class="${platform.icon} ${platform.color}"></i>`;
+            document.getElementById('result-platform-name').textContent = platform.name;
+            document.getElementById('preview-image').src = platform.preview;
+            
+            setTimeout(() => {
+                document.getElementById('processing-state').classList.add('hidden');
+                document.getElementById('success-state').classList.remove('hidden');
+            }, 2200);
+        }
+
+        document.getElementById('download-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('url-input').value.trim();
+            if (url) {
+                const platform = detectPlatform(url);
+                showResults(platform);
+            }
+        });
+
+        function hideResults() {
+            document.getElementById('results-section').classList.add('hidden');
+        }
+
+        async function triggerRealDownload() {
+            const inputUrl = document.getElementById('url-input').value.trim();
+            if (!inputUrl) return;
+
+            try {
+                // Update this URL once your backend is hosted
+                const response = await fetch('http://localhost:3000/api/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: inputUrl })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.videoUrl) {
+                    const a = document.createElement('a');
+                    a.href = data.videoUrl;
+                    a.download = (data.title || 'video') + '.mp4';
+                    a.click();
+                    
+                    alert(`✅ Downloading: ${data.title}`);
+                } else {
+                    alert("❌ Could not get download link. Try another video.");
+                }
+            } catch (err) {
+                alert("❌ Backend connection error. Ensure your backend server is running.");
+            }
+        }
+    </script>
+</body>
+</html>
